@@ -12,7 +12,10 @@ Rails::Initializer.run do |config|
   # -- all .rb files in that directory are automatically loaded.
 
   # Add additional load paths for your own custom dirs
-  # config.load_paths += %W( #{RAILS_ROOT}/extras )
+  # Add additional load paths for your own custom dirs
+  %w(observers).each do |dir|
+    config.load_paths << File.join(Rails.root, 'app', dir)
+  end
 
   # Specify gems that this application depends on and have them installed with rake gems:install
   # config.gem "bj"
@@ -30,6 +33,11 @@ Rails::Initializer.run do |config|
 
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
+
+  # enable all observers
+  config.active_record.observers = Dir.glob(File.join(RAILS_ROOT, 'app', 'observers', '*.rb')).map do |file|
+    File.basename(file, '.rb').to_sym
+  end
 
   # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
   # Run "rake -D time" for a list of tasks for finding time zone names.
