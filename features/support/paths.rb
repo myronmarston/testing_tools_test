@@ -10,6 +10,10 @@ module NavigationHelpers
     
     when /the home\s?page/
       '/'
+    when /the new user page/
+      new_user_path
+    when /the edit user page/
+      edit_user_path(@user)
     
     # Add more mappings here.
     # Here is a more fancy example:

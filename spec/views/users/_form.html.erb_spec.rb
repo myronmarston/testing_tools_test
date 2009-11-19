@@ -11,7 +11,7 @@ describe "/users/_form" do
     end
 
     it "should render a form to create a new record" do
-      render 
+      render :locals => { :submit_text => 'Sign Up' }
       response.should have_tag("form",
         :method => "post",
         :action => users_path(assigns(:user)) ) do |form|
@@ -22,7 +22,7 @@ describe "/users/_form" do
 
   context 'when the user is an existing record' do
     it "should render a form to update an existing record" do
-      render 
+      render :locals => { :submit_text => 'Save' }
       response.should have_tag("form",
         :method => "put",
         :action => users_path(assigns(:user)) ) do |form|
